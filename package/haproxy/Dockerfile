@@ -22,12 +22,11 @@ RUN mkdir /var/log/haproxy
 RUN touch /var/log/haproxy/traffic /var/log/haproxy/events /var/log/haproxy/errors
 RUN cat /etc/haproxy/logrotate.cfg >> /etc/logrotate.d/haproxy
 
-ENV TINI_VERSION v0.16.1
-ENV TINI_URL_default=https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini-${ARCH} \
-    TINI_URL_amd64=TINI_URL_default \
-    TINI_URL_arm=TINI_URL_default \
-    TINI_URL_ppc64le=https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini-ppc64el \
-    TINI_URL=TINI_URL_${ARCH}
+ENV TINI_VERSION=v0.16.1 \
+    TINI_ARCH_amd64=amd64 TINI_ARCH_arm=armhf TINI_ARCH_ppc64le=ppc64el \
+    TINI_ARCH=TINI_ARCH_${ARCH}
+
+ENV TINI_URL=https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini-${TINI_ARCH}
 RUN curl -fsSLo /tini ${!TINI_URL}
 RUN chmod +x /tini
 
