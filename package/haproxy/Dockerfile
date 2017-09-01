@@ -1,5 +1,7 @@
 FROM zambon/ubuntu-multi:16.04
 
+ARG ARCH
+
 RUN apt-get -q update && apt-get -qy install \
       jq \
       curl \
@@ -26,9 +28,7 @@ RUN cat /etc/haproxy/logrotate.cfg >> /etc/logrotate.d/haproxy
 ENV TINI_VERSION=v0.16.1 \
     TINI_ARCH_amd64=amd64 TINI_ARCH_arm=armhf TINI_ARCH_ppc64le=ppc64el \
     TINI_ARCH=TINI_ARCH_${ARCH}
-
-ENV TINI_URL=https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini-${!TINI_ARCH}
-RUN curl -fsSLo /tini ${TINI_URL}
+RUN curl -fsSLo /tini https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini-${!TINI_ARCH}
 RUN chmod +x /tini
 
 ENV SSL_SCRIPT_COMMIT 98660ada3d800f653fc1f105771b5173f9d1a019

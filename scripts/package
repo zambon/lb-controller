@@ -24,7 +24,7 @@ do
     cp -r ../../provider/${provider_type}/scripts scripts
     cp -r ../../provider/${provider_type}/config config
     IMAGE=${REPO}/lb-service-${provider_type}:${TAG}
-    docker build -t $IMAGE .
+    docker build --build-arg ARCH=${ARCH} -t $IMAGE .
     echo ${IMAGE} >> ../../dist/images
     echo Built $IMAGE
     cd ..
