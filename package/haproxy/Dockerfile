@@ -10,7 +10,8 @@ RUN apt-get -q update && apt-get -qy install \
       rsyslog \
       haproxy \
       software-properties-common \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* && \
+    rm -f /bin/sh && ln -s /bin/bash /bin/sh
 
 RUN mkdir -p /etc/haproxy/
 

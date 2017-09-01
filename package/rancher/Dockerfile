@@ -6,7 +6,8 @@ RUN apt-get -q update && apt-get -qy install \
       openssl \
       libssl-dev \
       unzip \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* && \
+    rm -f /bin/sh && ln -s /bin/bash /bin/sh
 
 ENV SSL_SCRIPT_COMMIT 98660ada3d800f653fc1f105771b5173f9d1a019
 RUN curl -fsSLo /usr/bin/update-rancher-ssl \
