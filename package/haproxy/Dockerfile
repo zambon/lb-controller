@@ -27,8 +27,8 @@ ENV TINI_VERSION=v0.16.1 \
     TINI_ARCH_amd64=amd64 TINI_ARCH_arm=armhf TINI_ARCH_ppc64le=ppc64el \
     TINI_ARCH=TINI_ARCH_${ARCH}
 
-ENV TINI_URL=https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini-${TINI_ARCH}
-RUN curl -fsSLo /tini ${!TINI_URL}
+ENV TINI_URL=https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini-${!TINI_ARCH}
+RUN curl -fsSLo /tini ${TINI_URL}
 RUN chmod +x /tini
 
 ENV SSL_SCRIPT_COMMIT 98660ada3d800f653fc1f105771b5173f9d1a019
